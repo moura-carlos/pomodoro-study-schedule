@@ -1,0 +1,20 @@
+<h1>Pomodoro Timer</h1>
+
+<% if @intervals.any? %>
+  <%= render partial: "intervals_table", locals: { intervals: @intervals } %>
+<% else %>
+  <p>Please enter your study hours and start time to generate Pomodoro intervals.</p>
+<% end %>
+
+<%= form_with url: pomodoros_path, method: :get do |form| %>
+  <%= form.label :hours, "Study Hours:" %>
+  <%= form.number_field :hours, id: "hours" %>
+
+  <%= form.label :minutes, "Study Minutes:" %>
+  <%= form.number_field :minutes, id: "minutes" %>
+
+  <%= form.label :start_time, "Start Time:" %>
+  <%= form.time_field :start_time, id: "start_time" %>
+
+  <%= form.submit "Generate Intervals" %>
+<% end %>
